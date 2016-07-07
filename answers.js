@@ -73,3 +73,54 @@ function eachFilter(array) {
 
 //eachFilter(testArray1);
 
+/*
+
+Exercise 3
+
+Write a function called filterArray that takes an array AND 
+a function as arguments. Your filter function should return a 
+new array that contains only the elements where the passed function 
+returns a truthy value.
+
+NOTE: You are allowed to use Array.prototype.filter to answer this question.
+
+NOTE 2: This is a bit of a trick question, the answer is a one-liner :)
+
+*/
+
+function filterArray(array, func) {
+    return array.filter(func)
+}
+
+
+/*
+
+Exercise 4
+
+Write a function called longestWord that takes a string as argument, 
+and returns the longest word in the string. You should use 
+Array.prototype.reduce to do your work.
+
+Hint: You can use String.prototype.split to split the string into an 
+array of words.
+
+*/
+
+var testString = "A collection of big and small words";
+
+function longestWord(string) {
+    var workingArray = string.split(" ");
+    var i = 1;
+    var result = workingArray[0];
+    while(i < workingArray.length) {
+        if(workingArray[i].length > result.length) {
+            result = workingArray[i];
+        }
+        i++;
+    }
+    return result;
+}
+
+// console.log(longestWord(testString))
+
+
