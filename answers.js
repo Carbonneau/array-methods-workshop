@@ -108,19 +108,112 @@ array of words.
 
 var testString = "A collection of big and small words";
 
+
 function longestWord(string) {
     var workingArray = string.split(" ");
-    var i = 1;
-    var result = workingArray[0];
-    while(i < workingArray.length) {
-        if(workingArray[i].length > result.length) {
-            result = workingArray[i];
+    return workingArray.reduce(function(largest, word) {
+            if (word.length > largest.length) {
+                return word;
+            }
+            else {
+              return largest
+              }
+        });
+}
+
+console.log(longestWord(testString))
+
+
+
+/*
+
+Exercise 5
+
+Write a function called countVowels that takes a string and returns the 
+number of vowels in the string. You should use Array.prototype.reduce to do 
+your work.
+
+Hint: You can use String.prototype.split again. There is a way to use 
+it to split a string by character. Try to Google it :)
+
+Hint 2: You can create an array of vowels and use Array.prototype.indexOf 
+to check if the current letter is a vowel.
+
+*/
+
+var testString = "a collection of big and small words";
+function isVowel(char) {
+      if(char === "a" || char ===  "e" || char ===  "i" || char ===  "o" || char === "u") {
+        return true
+        };
+}
+        
+    
+function countVowels(string) {
+
+    var workingArray = string.split("");
+    return workingArray.reduce(function(counter, letter){
+      
+      if(isVowel(letter)){
+        counter = counter + 1;
+      }
+      return counter;
+      }, 0);
+
+}
+
+
+console.log(countVowels(testString))
+
+/*
+
+Exercise 6
+
+Write a function called highLow that takes an array of numbers, 
+and returns an object with a property highest containing the highest number, 
+and a property lowest containing the lowest number, 
+using Array.prototype.reduce.
+
+For example, starting with [1, -10, 20, 40, 5], your function should 
+return {highest: 40, lowest: -10}.
+
+Hint: Javascript has a special value called Infinity, which is higher 
+than any other number. See if you can initialize your reduce accumulator 
+with Infinity and -Infinity :)
+
+
+*/
+
+var arrayOfNumbers = [1,2,3,4,5,-6,7,8,9,12,23,34,45,56,67];
+
+function highLow(array) {
+  
+    var result = { highest: Infinity, lowest: -Infinity };
+    
+    //high
+    result.highest = array.reduce(function(biggest,number){
+        if(number > biggest) {
+            biggest = number;
         }
-        i++;
-    }
+        return biggest;
+    },-Infinity);
+    
+    //low
+    result.lowest = array.reduce(function(smallest,number){
+        if(number < smallest) {
+            smallest = number;
+        }
+        return smallest;
+    },Infinity);
+    
     return result;
 }
 
-// console.log(longestWord(testString))
+console.log(highLow(arrayOfNumbers));
+
+/*
 
 
+
+
+*/
