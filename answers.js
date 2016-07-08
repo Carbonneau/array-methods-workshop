@@ -5,22 +5,22 @@ and uses the forEach method to print only the positive numbers.
 
 */
 
-var testArray1 = [1,3,5,6,-1,-2,-5];
+var testArray1 = [1, 3, 5, 6, -1, -2, -5];
 
-function isPos(num){
+function isPos(num) {
     if (num > 0) {
         return num;
-        
+
     }
 }
 
 
 function printPositives(array) {
     var returnArray = [];
-    array.forEach(function(item){
-        if(item > 0) { 
-          returnArray.push(item) 
-          };
+    array.forEach(function(item) {
+        if (item > 0) {
+            returnArray.push(item)
+        };
     })
     return returnArray;
 }
@@ -29,7 +29,7 @@ function printPositives(array) {
 
 function mapPositives(array) {
 
-   return array.map(function(item) {
+    return array.map(function(item) {
         if (item > 0) {
             return item;
         }
@@ -67,9 +67,11 @@ Your code will look something like: `return arr.filter(…).forEach(…)
 */
 
 function eachFilter(array) {
-    array.filter(isPos).forEach(function(item){console.log(item)});
+    array.filter(isPos).forEach(function(item) {
+        console.log(item)
+    });
 }
-    
+
 
 //eachFilter(testArray1);
 
@@ -112,13 +114,13 @@ var testString = "A collection of big and small words";
 function longestWord(string) {
     var workingArray = string.split(" ");
     return workingArray.reduce(function(largest, word) {
-            if (word.length > largest.length) {
-                return word;
-            }
-            else {
-              return largest
-              }
-        });
+        if (word.length > largest.length) {
+            return word;
+        }
+        else {
+            return largest
+        }
+    });
 }
 
 console.log(longestWord(testString))
@@ -142,23 +144,24 @@ to check if the current letter is a vowel.
 */
 
 var testString = "a collection of big and small words";
+
 function isVowel(char) {
-      if(char === "a" || char ===  "e" || char ===  "i" || char ===  "o" || char === "u") {
+    if (char === "a" || char === "e" || char === "i" || char === "o" || char === "u") {
         return true
-        };
+    };
 }
-        
-    
+
+
 function countVowels(string) {
 
     var workingArray = string.split("");
-    return workingArray.reduce(function(counter, letter){
-      
-      if(isVowel(letter)){
-        counter = counter + 1;
-      }
-      return counter;
-      }, 0);
+    return workingArray.reduce(function(counter, letter) {
+
+        if (isVowel(letter)) {
+            counter = counter + 1;
+        }
+        return counter;
+    }, 0);
 
 }
 
@@ -184,28 +187,31 @@ with Infinity and -Infinity :)
 
 */
 
-var arrayOfNumbers = [1,2,3,4,5,-6,7,8,9,12,23,34,45,56,67];
+var arrayOfNumbers = [1, 2, 3, 4, 5, -6, 7, 8, 9, 12, 23, 34, 45, 56, 67];
 
 function highLow(array) {
-  
-    var result = { highest: Infinity, lowest: -Infinity };
-    
+
+    var result = {
+        highest: -Infinity,
+        lowest: Infinity
+    };
+
     //high
-    result.highest = array.reduce(function(biggest,number){
-        if(number > biggest) {
+    result.highest = array.reduce(function(biggest, number) {
+        if (number > biggest) {
             biggest = number;
         }
         return biggest;
-    },-Infinity);
-    
+    }, -Infinity);
+
     //low
-    result.lowest = array.reduce(function(smallest,number){
-        if(number < smallest) {
+    result.lowest = array.reduce(function(smallest, number) {
+        if (number < smallest) {
             smallest = number;
         }
         return smallest;
-    },Infinity);
-    
+    }, Infinity);
+
     return result;
 }
 
@@ -213,7 +219,49 @@ console.log(highLow(arrayOfNumbers));
 
 /*
 
+Exercise 7
 
+Expanding on exercise 6, write a function called highLowTwo 
+that takes an array of numbers, and returns the higest, 
+second highest, lowest, and second lowest numbers.
 
 
 */
+
+function highLowTwo(array) {
+    var returnObj = {
+        highest: -Infinity,
+        secondHighest: -Infinity,
+        lowest: Infinity,
+        secondLowest: Infinity
+    };
+
+    var results = array.reduce(function(obj, number) {
+
+
+        if (number > returnObj.highest) {
+            returnObj.secondHighest = returnObj.highest;
+            returnObj.highest = number;
+        };
+
+        if (number > returnObj.secondHighest &&
+            number < returnObj.highest) {
+            returnObj.secondHighest = number
+        };
+
+        if (number < returnObj.lowest) {
+            returnObj.secondLowest = returnObj.lowest;
+            returnObj.lowest = number;
+        };
+
+        if (number > returnObj.lowest &&
+            number < returnObj.secondLowest) {
+            returnObj.secondLowest = number;
+        };
+
+    }, 0);
+
+    return returnObj;
+}
+
+console.log(highLowTwo(arrayOfNumbers));
